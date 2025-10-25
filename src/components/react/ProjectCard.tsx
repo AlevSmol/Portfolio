@@ -36,7 +36,7 @@ export default function ProjectCard({ title, description, link, image, tags }: P
       <ul className="flex gap-2 flex-wrap">
         {tags.map((tag) => (
           <li key={tag}>
-            <span className="bg-dark/50 text-primary text-sm rounded-full px-3 py-1">
+            <span className="bg-dark/50 text-violett text-sm rounded-full px-3 py-1">
               {tag}
             </span>
           </li>

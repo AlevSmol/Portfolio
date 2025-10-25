@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import ProgressBar from './ProgressBar';
+import ProgressBar from './ui/ProgressBar';
 
 interface Props {
     name: string;
@@ -50,11 +50,11 @@ export default function TechCard({ name, image, proficiency }: Props) {
           {/* Imagen centrada */}
           <div className="absolute inset-4  overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]">
             <motion.img
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
               src={image}
               alt={`${name}`}
-              className="w-full h-full"
+              className="w-full h-full object-contain"
             />
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function TechCard({ name, image, proficiency }: Props) {
       
       <div className="text-center">
         <h3 className="text-2xl font-semibold text-dark mb-2">{name}</h3>
-        <p className="text-primary font-medium">{getProficiencyLevel(proficiency)}</p>
+        <p className="text-violett font-medium">{getProficiencyLevel(proficiency)}</p>
       </div>
 
     </motion.article>
