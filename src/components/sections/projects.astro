@@ -1,0 +1,76 @@
+---
+import ProjectCard from "../react/ProjectCard"
+
+const PROJECTS = [
+  {
+    title: "Proyecto 1",
+    description: "Descripción del proyecto 1. Aquí puedes explicar brevemente de qué trata el proyecto.",
+    link: "proyecto-1",
+    image: "/projects/proyecto1.webp",
+    tags: ["React", "Node.js", "MongoDB"]
+  },
+  {
+    title: "Proyecto 2",
+    description: "Descripción del proyecto 2. Destaca las características más importantes.",
+    link: "proyecto-2",
+    image: "/projects/proyecto2.webp",
+    tags: ["React", "TypeScript", "Tailwind"]
+  },
+]
+---
+<section id="projects" class="relative w-screen z-10 bg-light">
+
+<div class="relative w-full mt-16 mb-16">
+  <!-- Borde superior con triángulos isósceles -->
+  <div class="absolute top-0 left-0 right-0 w-full h-12 -translate-y-full overflow-hidden">
+    <svg viewBox="0 0 100 12" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full">
+      <path d="M0 12 
+        L5 0 L10 12 L15 0 L20 12 L25 0 L30 12 L35 0 L40 12 L45 0 
+        L50 12 L55 0 L60 12 L65 0 L70 12 L75 0 L80 12 L85 0 L90 12 L95 0 
+        L100 12 L100 12 L0 12 Z" class="fill-secondary stroke-none"/>
+    </svg>
+  </div>
+
+  <div class="relative py-20 px-4 md:px-24 bg-secondary">
+  <div class="max-w-[1120px] mx-auto">
+    <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-light">
+      <svg 
+        class="size-7 text-primary"
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+      >
+        <path d="M3 3v18h18"/>
+        <path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3"/>
+      </svg>
+      Proyectos
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+      {
+        PROJECTS.map(project => (
+          <ProjectCard {...project} client:visible />
+        ))
+      } 
+    </div>
+  </div>
+</div>
+
+  <!-- Borde inferior con triángulos isósceles -->
+  <div class="absolute bottom-0 left-0 right-0 w-full h-12 translate-y-full overflow-hidden">
+    <svg viewBox="0 0 100 24" preserveAspectRatio="none" class="absolute drop-shadow-xl top-0 w-full h-full">
+      <path d="M0 0 
+        L5 12 L10 0 L15 12 L20 0 L25 12 L30 0 L35 12 L40 0 L45 12 
+        L50 0 L55 12 L60 0 L65 12 L70 0 L75 12 L80 0 L85 12 L90 0 L95 12 
+        L100 0 L100 0 L0 0 Z" class="fill-secondary stroke-none"/>
+    </svg>
+  </div>
+</div>
+
+</section>
+

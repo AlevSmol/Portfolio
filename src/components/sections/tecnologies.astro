@@ -1,0 +1,99 @@
+---
+import TechCard from "../react/TecnologyCard";
+
+const TECHNOLOGIES = [
+  {
+    name: "React",
+    image: "/techs/react.svg",
+    proficiency: 78
+  },
+  {
+    name: "Astro",
+    image: "/techs/astro.svg",
+    proficiency: 80
+  },
+  {
+    name: "Angular",
+    image: "/techs/angular.svg",
+    proficiency: 80
+  },
+  {
+    name: "CSS",
+    image: "/techs/css.svg",
+    proficiency: 95
+  },
+  {
+    name: "HTML",
+    image: "/techs/html.svg",
+    proficiency: 98
+  },
+  {
+    name: "Python",
+    image: "/techs/python.svg",
+    proficiency: 60
+  },
+  {
+    name: "Django",
+    image: "/techs/django.svg",
+    proficiency: 40
+  },
+  {
+    name: "Laravel",
+    image: "/techs/laravel.svg",
+    proficiency: 49
+  },
+  {
+    name: "NestJS",
+    image: "/techs/nestjs.svg",
+    proficiency: 70
+  },
+  {
+    name: "TypeScript",
+    image: "/techs/typescript.svg",
+    proficiency: 85
+  },
+  {
+    name: "JavaScript",
+    image: "/techs/javascript.svg",
+    proficiency: 90
+  }
+] as const;
+---
+
+<section id="technologies" class="py-20 relative !z-10 px-4 md:px-24 flex-grow pb-32 bg-light relative rounded-b-[44px]">
+      <!-- Blob gradiente en el fondo -->
+  <div class="absolute top-0 -z-10 h-[300px] w-[300px] bg-primary rounded-full blur-[128px] opacity-20"></div>
+  <div class="absolute bottom-0 right-0 -z-10 h-[300px] w-[300px] bg-secondary rounded-full blur-[128px] opacity-20"></div>
+
+    <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-dark">
+      <svg 
+        class="size-7 text-primary"
+        xmlns="http://www.w3.org/2000/svg" 
+        width="24" 
+        height="24" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"
+      >
+        <path d="m7 11 2-2-2-2"/>
+        <path d="M11 13h4"/>
+        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      </svg>
+      Tecnologías
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+      {
+        TECHNOLOGIES.map((tech) => (
+          <TechCard
+            name={tech.name}
+            image={tech.image}
+            proficiency={tech.proficiency}
+            client:visible
+          />
+        ))
+      }
+    </div>
+</section>
