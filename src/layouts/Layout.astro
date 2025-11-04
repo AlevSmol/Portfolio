@@ -9,7 +9,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Portafolio personal - Desarrollador Fullstack" } = Astro.props;
+const { title, description = "Portafolio - Arle Villasmil" } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,7 +18,7 @@ const { title, description = "Portafolio personal - Desarrollador Fullstack" } =
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/src/assets/arle_b.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />

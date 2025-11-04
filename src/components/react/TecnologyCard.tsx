@@ -31,7 +31,7 @@ export default function TechCard({ name, image, proficiency }: Props) {
       transition={{ duration: 0.6 }}
       className="flex flex-col items-center gap-4 p-4 rounded-xl bg-white shadow-xl backdrop-blur-sm"
     >
-      <div className="relative justifie-center ">
+      <div className="relative justify-center ">
         <div className="relative">
           <ProgressBar
             radius={100}
@@ -48,7 +48,7 @@ export default function TechCard({ name, image, proficiency }: Props) {
           
           
           {/* Imagen centrada */}
-          <div className="absolute inset-4  overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]">
+          <div className="absolute inset-4 overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]">
             <motion.img
               whileHover={{ scale: 0.9 }}
               transition={{ duration: 0.2 }}
@@ -68,3 +68,4 @@ export default function TechCard({ name, image, proficiency }: Props) {
     </motion.article>
   );
 }
+

@@ -14,7 +14,7 @@ export default {
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
 			violett: '#933DC9',
-			purplet: '#5722d3ff',
+			purplet: '#572db9ff',
   			light: '#FBFAEE',
   			gray: '#242424',
   			dark: '#000000',

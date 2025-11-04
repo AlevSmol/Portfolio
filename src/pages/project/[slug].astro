@@ -1,75 +1,107 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from "../../layouts/Layout.astro";
+import CarouselImg from "@/components/react/ui/CarouselImg";
+import { getCollection, type CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  return projects.map((project: CollectionEntry<'projects'>) => ({
+  const projects = await getCollection("projects");
+  return projects.map((project: CollectionEntry<"projects">) => ({
     params: { slug: project.slug },
     props: { project },
   }));
 }
 
 interface Props {
-  project: CollectionEntry<'projects'>;
+  project: CollectionEntry<"projects">;
 }
 
 const { project } = Astro.props;
 const { Content } = await project.render();
+const year = project.data.date.getFullYear();
 ---
 
 <Layout title={`Proyecto: ${project.data.title}`}>
-  <main class="m-auto max-w-4xl py-24">
-    <header class="relative">
-      <img 
-        src={project.data.image} 
-        alt={`Captura del proyecto ${project.data.title}`}
-        class="rounded-xl shadow-2xl shadow-white/10"
-      />
-    </header>
+  <main class="w-full z-10 text-gray-200 bg-dark">
+      <div class="absolute top-18 -z-10 h-screen w-screen bg-dark bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(147,61,201,0.3),rgba(0,0,0,0))]"></div>
 
-    <article class="mt-8 flex flex-col gap-4">
-      <h1 class="text-4xl font-bold text-gray-100">{project.data.title}</h1>
-      <p class="text-gray-400">{project.data.description}</p>
-
-      <ul class="flex gap-2 flex-wrap">
-        {project.data.tags.map((tag: string) => (
-          <li>
-            <span class="bg-slate-800 text-sm rounded-full px-3 py-1">
-              {tag}
-            </span>
-          </li>
-        ))}
-      </ul>
-
-      <div class="prose prose-invert max-w-none">
-        <Content />
-      </div>
-
-      <a 
-        href={project.data.link} 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        class="inline-flex items-center justify-center gap-2 px-4 py-1 
-               bg-slate-800 rounded-full hover:scale-110 hover:bg-slate-700 
-               transition"
+      <a
+        href="/#projects"
+        class="absolute top-[8rem] left-[1rem] text-gray-400   transition-all
+               duration-100 hover:text-gray-200 hover:left-[1.2rem] ease
+               flex items-center gap-2 mb-4"
       >
-        Ver proyecto
-        <svg 
-          class="w-4 h-4" 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24"
+        
+        <svg
+          class="w-8 h-8"
+          xmlns="http://www.w3.org/2000/svg"
           fill="none"
+          viewBox="0 0 24 24"
           stroke="currentColor"
         >
           <path 
             stroke-linecap="round" 
             stroke-linejoin="round" 
             stroke-width="2" 
-            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-          />
-        </svg>
+            d="M15 19l-7-7 7-7"
+        />
       </a>
+    <div class="grid grid-cols-[65%_auto] justify-between gap-4 items-start pr-0">
+      
+      <CarouselImg client:only="react" images={project.data.image} interval={5000} />
+      <article class="mt-14 flex flex-col gap-6 p-8 rounded-l-[14px] shadow-lg">
+
+        <div>
+          <h1 class="text-4xl text-light font-bold">{project.data.title}</h1>
+          <p class="text-slate-100 mt-1">{year}</p>
+        </div>
+
+        <p class="text-lg text-slate-100">{project.data.resume}</p>
+
+        <div class="flex flex-wrap gap-2">
+          {project.data.tags.map((tag: string) => (
+            <span class="bg-purple-800 text-sm text-light rounded-full px-3 py-1">{tag}</span>
+          ))}
+        </div>
+
+        <section class="mt-6">
+          <h2 class="text-2xl font-semibold mb-2 text-light">Descripción</h2>
+          <p class="leading-relaxed text-slate-100">{project.data.description}</p>
+        </section>
+        <a 
+          href={project.data.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-2 px-6 py-2 
+                bg-purple-800 rounded-full hover:scale-105 hover:bg-purple-600
+                transition mt-6 self-start"
+        >
+          Ver proyecto
+          <svg 
+            class="w-4 h-4" 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+        </a>
+      </article>
+    </div>
+
+    <article class="mt-8 flex flex-col gap-6 bg-light p-8 rounded-[40px] shadow-lg">
+
+      <section class="mt-2">
+        <h2 class="text-2xl font-semibold mb-2 text-dark">Detalles</h2>
+        <div class="prose prose-invert max-w-none text-slate-900">
+          <Content />
+        </div>
+      </section>
     </article>
   </main>
 </Layout>

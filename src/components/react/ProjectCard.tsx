@@ -2,13 +2,14 @@ import { motion } from 'framer-motion';
 
 interface Props {
   title: string;
-  description: string;
-  link: string;
+  resume: string;
   image: string;
   tags: string[];
+  year: number;
+  link: string;
 }
 
-export default function ProjectCard({ title, description, link, image, tags }: Props) {
+export default function ProjectCard({ title, resume, image, tags, year, link}: Props) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 80 }}
@@ -16,6 +17,7 @@ export default function ProjectCard({ title, description, link, image, tags }: P
       transition={{ duration: 0.6 }}
       className="flex flex-col gap-4"
     >
+      <span className="text-light/70">{year}</span>
       <a 
         href={`/project/${link}`}
         className="relative rounded-xl overflow-hidden"
@@ -31,7 +33,7 @@ export default function ProjectCard({ title, description, link, image, tags }: P
       </a>
       
       <h3 className="text-2xl font-semibold text-light">{title}</h3>
-      <p className="text-light/70">{description}</p>
+      <p className="text-light/70">{resume}</p>
       
       <ul className="flex gap-2 flex-wrap">
         {tags.map((tag) => (

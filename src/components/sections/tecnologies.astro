@@ -1,104 +1,121 @@
 ---
-import TechCard from "../react/TecnologyCard";
+import type { o } from "node_modules/framer-motion/dist/types.d-BJcRxCew";
+import FlipCard from "../react/ui/FlipCard";
 
 const TECHNOLOGIES = [
   {
     name: "React",
     image: "/techs/react.webp",
-    proficiency: 78
+    proficiency: 78,
+    description: "Biblioteca que utilizo para crear interfaces de usuario rápidas y modulares, con un enfoque en la reutilización de componentes."
   },
   {
     name: "Astro",
     image: "/techs/astro.webp",
-    proficiency: 80
+    proficiency: 80,
+    description: "Framework ultrarrápido que utilizo para crear sitios estáticos e híbridos mediante la generación de contenido en el momento de la construcción."
   },
   {
     name: "Angular",
     image: "/techs/angular.webp",
-    proficiency: 80
+    proficiency: 80,
+    description: "Framework robusto que utilizo para construir aplicaciones web de gran escala como apps CRM, SPA y SaaS."
   },
   {
     name: "TailwindCSS",
     image: "/techs/tailwind.webp",
-    proficiency: 90
+    proficiency: 90,
+    description: "Framework CSS utilitario que que uso para acelerar el desarrollo de interfaces."
   },
   {
     name: "NestJS",
     image: "/techs/nestjs.webp",
-    proficiency: 70
+    proficiency: 70,
+    description: "Framework backend escalable basado en Node.js y TypeScript que empleo para construir APIs RESTful."
   },
   {
     name: "TypeScript",
     image: "/techs/typescript.webp",
-    proficiency: 85
+    proficiency: 85,
+    description: "Lenguaje principal que utilizo para desarrollar aplicaciones web, basado en JavaScript con supertipado."
   },
   {
     name: "JavaScript",
     image: "/techs/javaScript.webp",
-    proficiency: 90
+    proficiency: 90,
+    description: "Lenguaje principal de la web, usado tanto en frontend como backend."
   },
   {
     name: "CSS",
     image: "/techs/css.webp",
-    proficiency: 95
+    proficiency: 95,
+    description: "Lenguaje de estilos que utilizo para diseñar interfaces web."
   },
   {
     name: "HTML",
     image: "/techs/html.webp",
-    proficiency: 98
+    proficiency: 98,
+    description: "Lenguaje de etiquetas estándar que utilizo para estructurar contenido web."
   },
   {
     name: "Python",
     image: "/techs/python.webp",
-    proficiency: 60
+    proficiency: 60,
+    description: "Lenguaje de programación versátil, en el cual me desempeño en manejo de datos y desarrollo de lógica de negocio."
   },
   {
     name: "Django",
     image: "/techs/django.webp",
-    proficiency: 40
+    proficiency: 40,
+    description: "Framework web de alto nivel para Python, rápido y seguro."
   },
   {
     name: "Laravel",
     image: "/techs/laravel.webp",
-    proficiency: 75
+    proficiency: 75,
+    description: "Framework PHP moderno enfocado en simplicidad y elegancia."
   },
 ] as const;
 ---
-
-<section id="technologies" class="py-20 relative !z-10 px-4 md:px-24 flex-grow pb-32 bg-light relative rounded-b-[44px]">
-      <!-- Blob gradiente en el fondo -->
+<section
+  id="technologies"
+  class="py-20 relative !z-10 px-4 md:px-24 flex-grow pb-32 bg-light relative rounded-b-[44px]"
+>
+  <!-- Blob gradiente en el fondo -->
   <div class="absolute top-0 -z-10 h-[300px] w-[300px] bg-violett rounded-full blur-[128px] opacity-20"></div>
   <div class="absolute bottom-0 right-0 -z-10 h-[300px] w-[300px] bg-purplet rounded-full blur-[128px] opacity-20"></div>
 
-    <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-dark">
-      <svg 
-        class="size-7 text-violett"
-        xmlns="http://www.w3.org/2000/svg" 
-        width="24" 
-        height="24" 
-        viewBox="0 0 24 24" 
-        fill="none" 
-        stroke="currentColor" 
-        stroke-width="2" 
-        stroke-linecap="round" 
-        stroke-linejoin="round"
-      >
-        <path d="m7 11 2-2-2-2"/>
-        <path d="M11 13h4"/>
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-      </svg>
-      Tecnologías
-    </h2>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
-      {
-        TECHNOLOGIES.map((tech) => (
-          <TechCard
-            name={tech.name}
-            image={tech.image}
-            proficiency={tech.proficiency}
-            client:visible
-          />
-        ))
-      }
-    </div>
+  <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-dark">
+    <svg
+      class="size-7 text-violett"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="m7 11 2-2-2-2" />
+      <path d="M11 13h4" />
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    </svg>
+    Tecnologías
+  </h2>
+
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+    {
+      TECHNOLOGIES.map((tech) => (
+        <FlipCard
+          name={tech.name}
+          image={tech.image}
+          proficiency={tech.proficiency}
+          description={tech.description}
+          client:only="react"
+        />
+      ))
+    }
+  </div>
 </section>
