@@ -24,15 +24,16 @@ export default function LogoCarousel({ columns = 1 }: { columns?: number }) {
   const CYCLE_DURATION = 2000; // 2 seconds per logo
 
   // Define logos using public SVGs
+  const baseUrl = import.meta.env.BASE_URL || '/';
   const logos = useMemo<Logo[]>(
     () => [
-      { id: 1, name: "Astro", src: "/logo/astro.webp" },
-      { id: 2, name: "Angular", src: "/logo/angular.webp" },
-      { id: 3, name: "TypeScript", src: "/logo/typescript.webp" },
-      { id: 4, name: "Nestjs", src: "/logo/nestjs.webp" },
-      { id: 5, name: "Docker", src: "/logo/docker.webp" },
+      { id: 1, name: "Astro", src: `${baseUrl}logo/astro.webp` },
+      { id: 2, name: "Angular", src: `${baseUrl}logo/angular.webp` },
+      { id: 3, name: "TypeScript", src: `${baseUrl}logo/typescript.webp` },
+      { id: 4, name: "Nestjs", src: `${baseUrl}logo/nestjs.webp` },
+      { id: 5, name: "Docker", src: `${baseUrl}logo/docker.webp` },
     ],
-    []
+    [baseUrl]
   );
 
   // Distribute logos across columns

@@ -10,29 +10,37 @@ interface CarouselImageProps {
 function CarouselImg({ images, interval = 3000 }: CarouselImageProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0); // 1 = derecha, -1 = izquierda
+  
+  // Obtener la ruta base
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  
+  // Agregar baseUrl a las imágenes si no lo tienen
+  const processedImages = images.map(img => 
+    img.startsWith('http') || img.startsWith(baseUrl) ? img : `${baseUrl}${img}`
+  );
 
   useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prevIndex) => 
-        prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        prevIndex === processedImages.length - 1 ? 0 : prevIndex + 1
       );
     }, interval);
 
     return () => clearInterval(timer);
-  }, [images.length, interval]);
+  }, [processedImages.length, interval]);
 
   const goToPrevious = () => {
     setDirection(-1);
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? processedImages.length - 1 : prevIndex - 1
     );
   };
 
   const goToNext = () => {
     setDirection(1);
     setCurrentIndex((prevIndex) => 
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === processedImages.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -59,7 +67,7 @@ function CarouselImg({ images, interval = 3000 }: CarouselImageProps) {
         <AnimatePresence initial={false} custom={direction}>
           <motion.img
             key={currentIndex}
-            src={images[currentIndex]}
+            src={processedImages[currentIndex]}
             custom={direction}
             variants={variants}
             initial="enter"
