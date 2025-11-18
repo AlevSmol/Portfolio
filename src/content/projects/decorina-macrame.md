@@ -33,13 +33,13 @@ El alcance se limita al desarrollo e implementación de una plataforma web funci
 
 El sistema será desarrollado en entorno web utilizando:
 
- <p className="mt-8 ml-16 bg-light text-slate-900">
+ <p className="mt-8 ml-16 bg-light  text-slate-900">
     o	Frontend: Angular 20
 </p>
  <p className="mt-8 ml-16 bg-light text-slate-900">
     o	Backend: Laravel 12 con API REST
 </p>
- <p className="mt-8 ml-16 bg-light text-slate-900">
+ <p className="mt-8 ml-16 bg-light text-dark">
     o	Base de datos: MySQL 11.2 XE
 </p>
  <p className="mt-8 ml-16 bg-light text-slate-900">
