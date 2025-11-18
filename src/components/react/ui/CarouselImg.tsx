@@ -16,7 +16,7 @@ function CarouselImg({ images, interval = 3000 }: CarouselImageProps) {
   
   // Agregar baseUrl a las imágenes si no lo tienen
   const processedImages = images.map(img => 
-    img.startsWith('http') || img.startsWith(baseUrl) ? img : `${baseUrl}${img}`
+    img.startsWith('http') || img.startsWith(baseUrl) ? img : `${baseUrl}/${img}`
   );
 
   useEffect(() => {

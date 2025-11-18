@@ -27,11 +27,11 @@ export default function LogoCarousel({ columns = 1 }: { columns?: number }) {
   const baseUrl = import.meta.env.BASE_URL || '/';
   const logos = useMemo<Logo[]>(
     () => [
-      { id: 1, name: "Astro", src: `${baseUrl}logo/astro.webp` },
-      { id: 2, name: "Angular", src: `${baseUrl}logo/angular.webp` },
-      { id: 3, name: "TypeScript", src: `${baseUrl}logo/typescript.webp` },
-      { id: 4, name: "Nestjs", src: `${baseUrl}logo/nestjs.webp` },
-      { id: 5, name: "Docker", src: `${baseUrl}logo/docker.webp` },
+      { id: 1, name: "Astro", src: `${baseUrl}/logo/astro.webp` },
+      { id: 2, name: "Angular", src: `${baseUrl}/logo/angular.webp` },
+      { id: 3, name: "TypeScript", src: `${baseUrl}/logo/typescript.webp` },
+      { id: 4, name: "Nestjs", src: `${baseUrl}/logo/nestjs.webp` },
+      { id: 5, name: "Docker", src: `${baseUrl}/logo/docker.webp` },
     ],
     [baseUrl]
   );

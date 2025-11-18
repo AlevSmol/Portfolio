@@ -45,7 +45,7 @@ const projects = (await getCollection("projects")).sort(
             projects.map(project => {
               const year = project.data.date.getFullYear();
               const images = project.data.image;
-              const imageUrl = `${import.meta.env.BASE_URL}${images[0]}`;
+              const imageUrl = `${import.meta.env.BASE_URL}/${images[0]}`;
               return (
                 <ProjectCard 
                   title={project.data.title}
