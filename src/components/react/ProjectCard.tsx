@@ -10,6 +10,8 @@ interface Props {
 }
 
 export default function ProjectCard({ title, resume, image, tags, year, link}: Props) {
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  
   return (
     <motion.article
       initial={{ opacity: 0, y: 80 }}
@@ -19,7 +21,7 @@ export default function ProjectCard({ title, resume, image, tags, year, link}: P
     >
       <span className="text-light/70">{year}</span>
       <a 
-        href={`/project/${link}`}
+        href={`${baseUrl}/project/${link}`}
         className="relative rounded-xl overflow-hidden"
         title={`${title}`}
       >
