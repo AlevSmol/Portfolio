@@ -1,75 +1,77 @@
 ---
-import ProjectCard from "../react/ProjectCard";
+import ProjectTimeline from "../react/ProjectTimeline";
 import { getCollection } from "astro:content";
 
-// Obtener todos los proyectos, ordenados por fecha (más reciente primero)
-const projects = (await getCollection("projects")).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
-);
+const projects = (await getCollection("projects"))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map(p => ({
+    id: p.id,
+    title: p.data.title,
+    year: p.data.date.getFullYear(),
+    tags: p.data.tags,
+    image: `${import.meta.env.BASE_URL}/${p.data.image[0]}`,
+    status: p.data.status,
+  }));
 ---
 
 <section id="projects" class="relative w-screen z-10 bg-light">
   <div class="relative w-full mt-16 mb-16">
-    <!-- Borde superior decorativo -->
-    <div class="absolute top-0 left-0 right-0 w-full h-12 -translate-y-full overflow-hidden">
-      <svg viewBox="0 0 100 12" preserveAspectRatio="none" class="absolute bottom-0 w-full h-full">
-        <path d="M0 12 L5 0 L10 12 L15 0 L20 12 L25 0 L30 12 L35 0 L40 12 L45 0 
-          L50 12 L55 0 L60 12 L65 0 L70 12 L75 0 L80 12 L85 0 L90 12 L95 0 
-          L100 12 L100 12 L0 12 Z" class="fill-purplet stroke-none"/>
-      </svg>
-    </div>
+    <div class="relative py-20 px-4 md:px-24 bg-purplet overflow-hidden isolate">
+      <!-- Top cream zigzag — teeth pointing DOWN into the purple-with-dots area -->
+      <div class="absolute top-0 left-0 right-0 w-full h-12 z-[1] pointer-events-none">
+        <svg viewBox="0 0 100 12" preserveAspectRatio="none" class="w-full h-full block">
+          <path d="M0 0 L5 12 L10 0 L15 12 L20 0 L25 12 L30 0 L35 12 L40 0 L45 12
+            L50 0 L55 12 L60 0 L65 12 L70 0 L75 12 L80 0 L85 12 L90 0 L95 12
+            L100 0 L100 0 L0 0 Z" class="fill-light stroke-none"/>
+        </svg>
+      </div>
 
-    <div class="relative py-20 px-4 md:px-24 bg-purplet">
-      <div class="max-w-[1120px] mx-auto">
-        <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-light">
-          <svg 
+      <!-- Bottom cream zigzag — teeth pointing UP into the purple-with-dots area -->
+      <div class="absolute bottom-0 left-0 right-0 w-full h-12 z-[1] pointer-events-none">
+        <svg viewBox="0 0 100 12" preserveAspectRatio="none" class="w-full h-full block">
+          <path d="M0 12 L5 0 L10 12 L15 0 L20 12 L25 0 L30 12 L35 0 L40 12 L45 0
+            L50 12 L55 0 L60 12 L65 0 L70 12 L75 0 L80 12 L85 0 L90 12 L95 0
+            L100 12 L100 12 L0 12 Z" class="fill-light stroke-none"/>
+        </svg>
+      </div>
+      <!-- Ambient gradient blobs for depth -->
+      <div class="absolute -top-32 -left-20 -z-10 h-[420px] w-[420px] bg-violett rounded-full blur-[140px] opacity-40"></div>
+      <div class="absolute -bottom-32 -right-20 -z-10 h-[500px] w-[500px] bg-purple-400 rounded-full blur-[150px] opacity-25"></div>
+      <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -z-10 h-[280px] w-[700px] bg-violett rounded-full blur-[120px] opacity-15"></div>
+
+      <!-- Subtle dot pattern overlay -->
+      <div
+        class="absolute inset-0 -z-10 opacity-[0.18] pointer-events-none"
+        style="background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px); background-size: 28px 28px;"
+      ></div>
+
+      <!-- Inner top shadow for depth carving effect -->
+      <div class="absolute top-0 left-0 right-0 h-24 -z-10 bg-gradient-to-b from-black/25 via-black/10 to-transparent pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 right-0 h-24 -z-10 bg-gradient-to-t from-black/20 via-black/5 to-transparent pointer-events-none"></div>
+
+      <div class="max-w-[1120px] mx-auto relative">
+        <h2 class="text-3xl font-bold mb-6 flex gap-x-3 items-center text-light drop-shadow-lg">
+          <svg
             class="size-7 text-violett"
-            xmlns="http://www.w3.org/2000/svg" 
-            width="24" 
-            height="24" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            stroke-width="2" 
-            stroke-linecap="round" 
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
             stroke-linejoin="round"
           >
             <path d="M3 3v18h18"/>
             <path d="m18.7 8-5.1 5.2-2.8-2.7L7 14.3"/>
           </svg>
-          Proyectos
+          Roadmap de Proyectos
         </h2>
+        <p class="text-light/70 mb-10 text-sm">Mi trayectoria de desarrollo ordenada cronológicamente</p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-          {
-            projects.map(project => {
-              const year = project.data.date.getFullYear();
-              const images = project.data.image;
-              const imageUrl = `${import.meta.env.BASE_URL}/${images[0]}`;
-              return (
-                <ProjectCard 
-                  title={project.data.title}
-                  resume={project.data.resume}
-                  image={imageUrl}
-                  tags={project.data.tags}
-                  year={year}
-                  link={`${project.slug}`}
-                  client:visible 
-                />
-              );
-            })
-          }
-        </div>
+        <ProjectTimeline projects={projects} baseUrl={import.meta.env.BASE_URL} client:visible />
       </div>
-    </div>
-
-    <!-- Borde inferior decorativo -->
-    <div class="absolute bottom-0 left-0 right-0 w-full h-12 translate-y-full overflow-hidden">
-      <svg viewBox="0 0 100 24" preserveAspectRatio="none" class="absolute drop-shadow-xl top-0 w-full h-full">
-        <path d="M0 0 L5 12 L10 0 L15 12 L20 0 L25 12 L30 0 L35 12 L40 0 L45 12 
-          L50 0 L55 12 L60 0 L65 12 L70 0 L75 12 L80 0 L85 12 L90 0 L95 12 
-          L100 0 L100 0 L0 0 Z" class="fill-purplet stroke-none"/>
-      </svg>
     </div>
   </div>
 </section>

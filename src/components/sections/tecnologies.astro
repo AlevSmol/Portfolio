@@ -1,12 +1,11 @@
 ---
-import type { o } from "node_modules/framer-motion/dist/types.d-BJcRxCew";
 import FlipCard from "../react/ui/FlipCard";
 
 const TECHNOLOGIES = [
   {
     name: "React",
     image: `${import.meta.env.BASE_URL}/techs/react.webp`,
-    proficiency: 78,
+    proficiency: 60,
     description: "Biblioteca que utilizo para crear interfaces de usuario rápidas y modulares, con un enfoque en la reutilización de componentes."
   },
   {
@@ -18,7 +17,7 @@ const TECHNOLOGIES = [
   {
     name: "Angular",
     image: `${import.meta.env.BASE_URL}/techs/angular.webp`,
-    proficiency: 80,
+    proficiency: 50,
     description: "Framework robusto que utilizo para construir aplicaciones web de gran escala como apps CRM, SPA y SaaS."
   },
   {
@@ -30,7 +29,7 @@ const TECHNOLOGIES = [
   {
     name: "NestJS",
     image: `${import.meta.env.BASE_URL}/techs/nestjs.webp`,
-    proficiency: 70,
+    proficiency: 75,
     description: "Framework backend escalable basado en Node.js y TypeScript que empleo para construir APIs RESTful."
   },
   {
@@ -46,18 +45,6 @@ const TECHNOLOGIES = [
     description: "Lenguaje principal de la web, usado tanto en frontend como backend."
   },
   {
-    name: "CSS",
-    image: `${import.meta.env.BASE_URL}/techs/css.webp`,
-    proficiency: 95,
-    description: "Lenguaje de estilos que utilizo para diseñar interfaces web."
-  },
-  {
-    name: "HTML",
-    image: `${import.meta.env.BASE_URL}/techs/html.webp`,
-    proficiency: 98,
-    description: "Lenguaje de etiquetas estándar que utilizo para estructurar contenido web."
-  },
-  {
     name: "Python",
     image: `${import.meta.env.BASE_URL}/techs/python.webp`,
     proficiency: 60,
@@ -66,14 +53,20 @@ const TECHNOLOGIES = [
   {
     name: "Django",
     image: `${import.meta.env.BASE_URL}/techs/django.webp`,
-    proficiency: 40,
+    proficiency: 31,
     description: "Framework web de alto nivel para Python, rápido y seguro."
   },
   {
     name: "Laravel",
     image: `${import.meta.env.BASE_URL}/techs/laravel.webp`,
-    proficiency: 75,
+    proficiency: 50,
     description: "Framework PHP moderno enfocado en simplicidad y elegancia."
+  },
+  {
+    name: "Electron",
+    image: `${import.meta.env.BASE_URL}/techs/electron.webp`,
+    proficiency: 65,
+    description: "Framework para construir aplicaciones de escritorio multiplataforma usando tecnologías web (HTML, CSS, JavaScript)."
   },
 ] as const;
 ---
@@ -105,7 +98,8 @@ const TECHNOLOGIES = [
     Tecnologías
   </h2>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-12">
+  <p class="text-slate-600 mb-6 text-sm">Haz click en una tecnología para filtrar los proyectos</p>
+  <div class="grid grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-4">
     {
       TECHNOLOGIES.map((tech) => (
         <FlipCard

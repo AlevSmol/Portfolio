@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import ReactCardFlip from 'react-card-flip';
+import { useEffect, useState } from 'react';
 import TechCard from '../TecnologyCard';
-import TechCardBack from '../TechCardBack';
 
 interface FlipCardProps {
   name: string;
@@ -10,37 +8,36 @@ interface FlipCardProps {
   description: string;
 }
 
-interface FlipCardState {
-  isFlipped: boolean;
-}
+export default function FlipCard({ name, image, proficiency }: FlipCardProps) {
+  const [isActive, setIsActive] = useState(false);
 
-class FlipCard extends Component<FlipCardProps, FlipCardState> {
-  constructor(props: FlipCardProps) {
-    super(props);
-    this.state = { isFlipped: false };
-    this.handleClick = this.handleClick.bind(this);
-  }
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const tag = (e as CustomEvent).detail?.tag ?? null;
+      setIsActive(tag === name);
+    };
+    window.addEventListener('tech-filter', handler);
+    return () => window.removeEventListener('tech-filter', handler);
+  }, [name]);
 
-  handleClick(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
-    event.preventDefault();
-    this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
-  }
+  const handleClick = () => {
+    const newActive = !isActive;
 
-  render() {
-    const { name, image, proficiency, description } = this.props;
-
-    return (
-      <ReactCardFlip isFlipped={this.state.isFlipped}>
-        <div onClick={this.handleClick} className='cursor-pointer'>
-            <TechCard name={name} image={image} proficiency={proficiency} />
-        </div>
-
-        <div onClick={this.handleClick} className='cursor-pointer'>
-            <TechCardBack name={name} image={image} description={description} />
-        </div>
-      </ReactCardFlip>
+    window.dispatchEvent(
+      new CustomEvent('tech-filter', { detail: { tag: newActive ? name : null } })
     );
-  }
-}
 
-export default FlipCard;
+    if (newActive) {
+      const roadmap = document.getElementById('projects');
+      if (roadmap) {
+        roadmap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
+  return (
+    <div onClick={handleClick} className="cursor-pointer">
+      <TechCard name={name} image={image} proficiency={proficiency} isActive={isActive} />
+    </div>
+  );
+}

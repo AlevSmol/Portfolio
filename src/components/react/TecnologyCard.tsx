@@ -3,20 +3,21 @@ import { useEffect, useState } from 'react';
 import ProgressBar from './ui/ProgressBar';
 
 interface Props {
-    name: string;
-    image: string;
-    proficiency: number;
+  name: string;
+  image: string;
+  proficiency: number;
+  isActive?: boolean;
 }
 
 const getProficiencyLevel = (proficiency: number) => {
-  if (proficiency < 50) return 'Nivel Principiante';
-  if (proficiency < 80) return 'Nivel Intermedio';
-  return 'Nivel Avanzado';
+  if (proficiency < 35) return 'Principiante';
+  if (proficiency < 71) return 'Intermedio';
+  return 'Avanzado';
 };
 
-export default function TechCard({ name, image, proficiency }: Props) {
+export default function TechCard({ name, image, proficiency, isActive }: Props) {
   const [progress, setProgress] = useState(0);
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setProgress(proficiency);
@@ -26,46 +27,42 @@ export default function TechCard({ name, image, proficiency }: Props) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 80 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="flex flex-col items-center gap-4 p-4 rounded-xl bg-white shadow-xl backdrop-blur-sm"
+      transition={{ duration: 0.4 }}
+      viewport={{ once: true }}
+      className={`flex items-center justify-center p-2 rounded-xl bg-white shadow-md transition-all
+        ${isActive ? 'ring-2 ring-violett shadow-lg shadow-purple-500/20 scale-[1.03]' : 'hover:shadow-lg'}`}
     >
-      <div className="relative justify-center ">
-        <div className="relative">
-          <ProgressBar
-            radius={100}
-            progress={progress}
-            strokeWidth={6}
-            cut={120}
-            rotate={-210}
-            strokeColor="#933DC9"
-            strokeLinecap="butt"
-            trackStrokeWidth={6}
-            trackStrokeColor="rgba(147, 61, 201, 0.2)"
-            transition="1.5s ease"
+      <div className="relative inline-flex">
+        <ProgressBar
+          radius={65}
+          progress={progress}
+          strokeWidth={5}
+          cut={120}
+          rotate={-210}
+          strokeColor="#933DC9"
+          strokeLinecap="butt"
+          trackStrokeWidth={5}
+          trackStrokeColor="rgba(147, 61, 201, 0.2)"
+          transition="1.5s ease"
+        />
+
+        {/* Content stacked vertically inside the arc */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 pointer-events-none">
+          <img
+            src={image}
+            alt={name}
+            className="w-15 h-15 object-contain"
           />
-          
-          
-          {/* Imagen centrada */}
-          <div className="absolute inset-4 overflow-hidden top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%]">
-            <motion.img
-              whileHover={{ scale: 0.9 }}
-              transition={{ duration: 0.2 }}
-              src={image}
-              alt={`${name}`}
-              className="w-full h-full object-contain"
-            />
+          <div className="text-center leading-tight px-1">
+            <h3 className="text-[15px] font-semibold text-dark leading-tight">{name}</h3>
+            <p className="text-violett text-[10px] font-medium leading-tight">
+              {getProficiencyLevel(proficiency)}
+            </p>
           </div>
         </div>
       </div>
-      
-      <div className="text-center">
-        <h3 className="text-2xl font-semibold text-dark mb-2">{name}</h3>
-        <p className="text-violett font-medium">{getProficiencyLevel(proficiency)}</p>
-      </div>
-
     </motion.article>
   );
 }
-
