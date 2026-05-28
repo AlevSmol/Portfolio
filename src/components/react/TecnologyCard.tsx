@@ -7,6 +7,7 @@ interface Props {
   image: string;
   proficiency: number;
   isActive?: boolean;
+  index?: number;
 }
 
 const getProficiencyLevel = (proficiency: number) => {
@@ -15,7 +16,7 @@ const getProficiencyLevel = (proficiency: number) => {
   return 'Avanzado';
 };
 
-export default function TechCard({ name, image, proficiency, isActive }: Props) {
+export default function TechCard({ name, image, proficiency, isActive, index = 0 }: Props) {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function TechCard({ name, image, proficiency, isActive }: Props) 
     <motion.article
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
       viewport={{ once: true }}
       className={`flex items-center justify-center p-2 rounded-xl bg-white shadow-md transition-all
         ${isActive ? 'ring-2 ring-violett shadow-lg shadow-purple-500/20 scale-[1.03]' : 'hover:shadow-lg'}`}

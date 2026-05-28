@@ -6,9 +6,10 @@ interface FlipCardProps {
   image: string;
   proficiency: number;
   description: string;
+  index?: number;
 }
 
-export default function FlipCard({ name, image, proficiency }: FlipCardProps) {
+export default function FlipCard({ name, image, proficiency, index }: FlipCardProps) {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function FlipCard({ name, image, proficiency }: FlipCardProps) {
 
   return (
     <div onClick={handleClick} className="cursor-pointer">
-      <TechCard name={name} image={image} proficiency={proficiency} isActive={isActive} />
+      <TechCard name={name} image={image} proficiency={proficiency} isActive={isActive} index={index} />
     </div>
   );
 }
